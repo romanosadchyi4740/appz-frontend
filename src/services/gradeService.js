@@ -67,3 +67,21 @@ export const getGradesByParentId = async (parentId) => {
     throw error;
   }
 };
+
+export const getGradesByStudentIdAndSubject = async (studentId, subject) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/grades/student/${studentId}/subject/${encodeURIComponent(subject)}`, {
+      method: 'GET',
+      headers: getAuthHeaders(),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(errorText || 'Failed to fetch grades');
+    }
+
+    return await response.json();
+  } catch (error) {
+    throw error;
+  }
+};

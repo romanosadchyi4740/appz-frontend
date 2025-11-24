@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Login from './components/Login'
 import StudentsList from './components/StudentsList'
 import StudentDetails from './components/StudentDetails'
+import ChildrenList from './components/ChildrenList'
 import GradesView from './components/GradesView'
 import { isAuthenticated, removeToken, getUserRole } from './services/authService'
 import './App.css'
@@ -9,6 +10,9 @@ import './App.css'
 function App() {
   const [authenticated, setAuthenticated] = useState(isAuthenticated())
   const [selectedStudentId, setSelectedStudentId] = useState(null)
+  const [selectedStudent, setSelectedStudent] = useState(null)
+  const [selectedChildId, setSelectedChildId] = useState(null)
+  const [selectedChild, setSelectedChild] = useState(null)
 
   const handleLoginSuccess = () => {
     setAuthenticated(true)
@@ -18,18 +22,29 @@ function App() {
     removeToken()
     setAuthenticated(false)
     setSelectedStudentId(null)
+    setSelectedStudent(null)
+    setSelectedChildId(null)
+    setSelectedChild(null)
   }
-
-  const [selectedStudent, setSelectedStudent] = useState(null)
 
   const handleStudentClick = (student) => {
     setSelectedStudent(student)
     setSelectedStudentId(student.id)
   }
 
+  const handleChildClick = (child) => {
+    setSelectedChild(child)
+    setSelectedChildId(child.id)
+  }
+
   const handleBackToList = () => {
     setSelectedStudentId(null)
     setSelectedStudent(null)
+  }
+
+  const handleBackToChildren = () => {
+    setSelectedChildId(null)
+    setSelectedChild(null)
   }
 
   if (!authenticated) {
@@ -61,7 +76,17 @@ function App() {
           ) : (
             <StudentsList onStudentClick={handleStudentClick} />
           )
-        ) : isParent || isStudent ? (
+        ) : isParent ? (
+          selectedChildId ? (
+            <GradesView 
+              userRole={userRole} 
+              studentId={selectedChildId}
+              onBack={handleBackToChildren}
+            />
+          ) : (
+            <ChildrenList onChildClick={handleChildClick} />
+          )
+        ) : isStudent ? (
           <GradesView userRole={userRole} />
         ) : (
           <p>You are successfully logged in!</p>

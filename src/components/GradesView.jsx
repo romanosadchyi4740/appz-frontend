@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import { getGradesByStudentId, getGradesByParentId } from '../services/gradeService';
+import { getGradesByStudentId } from '../services/gradeService';
 import { getUserId } from '../services/authService';
 import './GradesView.css';
 
-function GradesView({ userRole }) {
+function GradesView({ userRole, studentId, onBack }) {
   const [grades, setGrades] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -11,23 +11,14 @@ function GradesView({ userRole }) {
 
   useEffect(() => {
     loadGrades();
-  }, [userRole]);
+  }, [studentId]);
 
   const loadGrades = async () => {
     try {
       setLoading(true);
       setError('');
-      const userId = getUserId();
-      
-      let data;
-      if (userRole === 'STUDENT') {
-        data = await getGradesByStudentId(userId);
-      } else if (userRole === 'PARENT') {
-        data = await getGradesByParentId(userId);
-      } else {
-        throw new Error('Invalid role for grades view');
-      }
-
+      const id = studentId || getUserId();
+      const data = await getGradesByStudentId(id);
       setGrades(data);
       groupGradesBySubject(data);
     } catch (err) {
@@ -70,10 +61,27 @@ function GradesView({ userRole }) {
 
   const subjects = Object.keys(groupedGrades).sort();
 
+  const formatDate = (dateString) => {
+    if (!dateString) return 'Unknown';
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', { 
+      year: 'numeric', 
+      month: 'short', 
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  };
+
   return (
     <div className="grades-container">
+      {onBack && (
+        <button onClick={onBack} className="back-button">
+          ← Back
+        </button>
+      )}
       <h2 className="grades-title">
-        {userRole === 'STUDENT' ? 'My Grades' : 'My Children\'s Grades'}
+        {userRole === 'STUDENT' ? 'My Grades' : 'Grades'}
       </h2>
       
       {subjects.length === 0 ? (
@@ -91,6 +99,7 @@ function GradesView({ userRole }) {
                       <div className="grade-student">{grade.studentName}</div>
                     )}
                     <div className="grade-teacher">Teacher: {grade.teacherName}</div>
+                    <div className="grade-date">Date: {formatDate(grade.createdAt)}</div>
                   </div>
                 ))}
               </div>

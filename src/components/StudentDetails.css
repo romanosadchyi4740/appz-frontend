@@ -106,6 +106,65 @@
   transform: translateY(-1px);
 }
 
+.student-grades-section {
+  margin-top: 32px;
+  background: #fff8f0;
+  border: 2px solid #ffd4a3;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(255, 165, 0, 0.1);
+}
+
+.grades-section-title {
+  color: #d97706;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 20px 0;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #ffd4a3;
+}
+
+.grades-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 16px;
+}
+
+.grade-card {
+  background: #ffffff;
+  border: 2px solid #ffd4a3;
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.grade-card:hover {
+  border-color: #ff9500;
+  box-shadow: 0 4px 12px rgba(255, 149, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+.grade-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #d97706;
+  margin-bottom: 8px;
+}
+
+.grade-date {
+  font-size: 0.8rem;
+  color: #92400e;
+  opacity: 0.7;
+}
+
+.no-grades {
+  text-align: center;
+  padding: 20px;
+  color: #92400e;
+  font-size: 1rem;
+}
+
 @media (max-width: 768px) {
   .student-details-container {
     padding: 16px;
@@ -122,6 +181,14 @@
 
   .detail-label {
     min-width: auto;
+  }
+
+  .grades-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .student-grades-section {
+    padding: 16px;
   }
 }
 

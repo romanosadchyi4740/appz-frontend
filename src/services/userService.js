@@ -44,3 +44,39 @@ export const getUserById = async (id) => {
   }
 };
 
+export const getChildrenByParentId = async (parentId) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/users/parents/${parentId}/children`, {
+      method: 'GET',
+      headers: getAuthHeaders(),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(errorText || 'Failed to fetch children');
+    }
+
+    return await response.json();
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getTeacherById = async (id) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/users/teachers/${id}`, {
+      method: 'GET',
+      headers: getAuthHeaders(),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(errorText || 'Failed to fetch teacher');
+    }
+
+    return await response.json();
+  } catch (error) {
+    throw error;
+  }
+};
+
