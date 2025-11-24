@@ -1,0 +1,134 @@
+.grades-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.grades-title {
+  color: #d97706;
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0 0 32px 0;
+}
+
+.loading-message,
+.error-message,
+.no-grades {
+  text-align: center;
+  padding: 40px;
+  color: #92400e;
+  font-size: 1.1rem;
+}
+
+.error-message {
+  color: #991b1b;
+  background: #fee2e2;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.retry-button {
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #ff9500 0%, #ff8c00 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(255, 149, 0, 0.3);
+  display: block;
+  margin: 0 auto;
+}
+
+.retry-button:hover {
+  background: linear-gradient(135deg, #ff8c00 0%, #ff7f00 100%);
+  box-shadow: 0 4px 12px rgba(255, 149, 0, 0.4);
+  transform: translateY(-1px);
+}
+
+.grades-list {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.subject-group {
+  background: #fff8f0;
+  border: 2px solid #ffd4a3;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(255, 165, 0, 0.1);
+}
+
+.subject-title {
+  color: #d97706;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 20px 0;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #ffd4a3;
+}
+
+.grades-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.grade-card {
+  background: #ffffff;
+  border: 2px solid #ffd4a3;
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.grade-card:hover {
+  border-color: #ff9500;
+  box-shadow: 0 4px 12px rgba(255, 149, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+.grade-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #d97706;
+  margin-bottom: 8px;
+}
+
+.grade-student {
+  font-size: 0.9rem;
+  color: #92400e;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.grade-teacher {
+  font-size: 0.85rem;
+  color: #92400e;
+  opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+  .grades-container {
+    padding: 16px;
+  }
+
+  .grades-title {
+    font-size: 1.5rem;
+  }
+
+  .grades-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .subject-group {
+    padding: 16px;
+  }
+}
+
