@@ -1,0 +1,143 @@
+.users-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.users-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.users-title {
+  color: #d97706;
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.create-user-button {
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #ff9500 0%, #ff8c00 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(255, 149, 0, 0.3);
+}
+
+.create-user-button:hover {
+  background: linear-gradient(135deg, #ff8c00 0%, #ff7f00 100%);
+  box-shadow: 0 6px 16px rgba(255, 149, 0, 0.4);
+  transform: translateY(-1px);
+}
+
+.loading-message,
+.error-message,
+.no-users {
+  text-align: center;
+  padding: 40px;
+  color: #92400e;
+  font-size: 1.1rem;
+}
+
+.error-message {
+  color: #991b1b;
+  background: #fee2e2;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.retry-button {
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #ff9500 0%, #ff8c00 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(255, 149, 0, 0.3);
+  display: block;
+  margin: 0 auto;
+}
+
+.retry-button:hover {
+  background: linear-gradient(135deg, #ff8c00 0%, #ff7f00 100%);
+  box-shadow: 0 4px 12px rgba(255, 149, 0, 0.4);
+  transform: translateY(-1px);
+}
+
+.users-list {
+  display: grid;
+  gap: 16px;
+}
+
+.user-card {
+  background: #fff8f0;
+  border: 2px solid #ffd4a3;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(255, 165, 0, 0.1);
+}
+
+.user-info {
+  flex: 1;
+}
+
+.user-name {
+  color: #d97706;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.user-email {
+  color: #92400e;
+  font-size: 0.95rem;
+  opacity: 0.8;
+}
+
+.user-role {
+  background: #ffd4a3;
+  color: #d97706;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+  .users-container {
+    padding: 16px;
+  }
+
+  .users-header {
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+  }
+
+  .users-title {
+    font-size: 1.5rem;
+  }
+
+  .user-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}
+

@@ -4,6 +4,8 @@ import StudentsList from './components/StudentsList'
 import StudentDetails from './components/StudentDetails'
 import ChildrenList from './components/ChildrenList'
 import GradesView from './components/GradesView'
+import UsersList from './components/UsersList'
+import CreateUserForm from './components/CreateUserForm'
 import { isAuthenticated, removeToken, getUserRole } from './services/authService'
 import './App.css'
 
@@ -13,6 +15,8 @@ function App() {
   const [selectedStudent, setSelectedStudent] = useState(null)
   const [selectedChildId, setSelectedChildId] = useState(null)
   const [selectedChild, setSelectedChild] = useState(null)
+  const [showCreateUserForm, setShowCreateUserForm] = useState(false)
+  const [usersRefreshTrigger, setUsersRefreshTrigger] = useState(0)
 
   const handleLoginSuccess = () => {
     setAuthenticated(true)
@@ -25,6 +29,7 @@ function App() {
     setSelectedStudent(null)
     setSelectedChildId(null)
     setSelectedChild(null)
+    setShowCreateUserForm(false)
   }
 
   const handleStudentClick = (student) => {
@@ -56,6 +61,12 @@ function App() {
   const isTeacher = userRole === 'TEACHER'
   const isParent = userRole === 'PARENT'
   const isStudent = userRole === 'STUDENT'
+  const isAdmin = userRole === 'ADMIN'
+
+  const handleCreateUserSuccess = () => {
+    setShowCreateUserForm(false)
+    setUsersRefreshTrigger(prev => prev + 1) // Trigger refresh
+  }
 
   return (
     <div className="app-container">
@@ -88,6 +99,20 @@ function App() {
           )
         ) : isStudent ? (
           <GradesView userRole={userRole} />
+        ) : isAdmin ? (
+          <>
+            {showCreateUserForm ? (
+              <CreateUserForm
+                onSuccess={handleCreateUserSuccess}
+                onCancel={() => setShowCreateUserForm(false)}
+              />
+            ) : (
+              <UsersList 
+                onCreateUserClick={() => setShowCreateUserForm(true)}
+                refreshTrigger={usersRefreshTrigger}
+              />
+            )}
+          </>
         ) : (
           <p>You are successfully logged in!</p>
         )}

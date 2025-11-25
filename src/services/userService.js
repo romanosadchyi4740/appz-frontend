@@ -80,3 +80,58 @@ export const getTeacherById = async (id) => {
   }
 };
 
+export const getAllUsers = async () => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/users`, {
+      method: 'GET',
+      headers: getAuthHeaders(),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(errorText || 'Failed to fetch users');
+    }
+
+    return await response.json();
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getAllParents = async () => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/users/parents`, {
+      method: 'GET',
+      headers: getAuthHeaders(),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(errorText || 'Failed to fetch parents');
+    }
+
+    return await response.json();
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const createUser = async (userData) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/users`, {
+      method: 'POST',
+      headers: getAuthHeaders(),
+      body: JSON.stringify(userData),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(errorText || 'Failed to create user');
+    }
+
+    return await response.json();
+  } catch (error) {
+    throw error;
+  }
+};
+
