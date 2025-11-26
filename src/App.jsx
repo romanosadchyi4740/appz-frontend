@@ -71,7 +71,7 @@ function App() {
   return (
     <div className="app-container">
       <div className="app-header">
-        <h1>Welcome to APPZ</h1>
+        <h1>eGrading System</h1>
         <button onClick={handleLogout} className="logout-button">
           Logout
         </button>
